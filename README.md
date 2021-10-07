@@ -1,24 +1,74 @@
-# README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# テーブル設計
 
-Things you may want to cover:
+## Users テーブル
 
-* Ruby version
+| Column             | Type   | Options     |
+| ------------------ | ------ | ----------- |
+| nickname           | string | NOT NULL    |
+| email              | string | NOT NULL    |
+| password           | string | NOT NULL    |
 
-* System dependencies
+### Association
 
-* Configuration
+- has_many :item
+- has_many :order
+- has_one  :plofile
 
-* Database creation
 
-* Database initialization
+## Plofiles テーブル
 
-* How to run the test suite
+| Column             | Type      | Options     |
+| ------------------ | --------- | ----------- |
+| last_name          | string    | NOT NULL    |
+| first_name         | string    | NOT NULL    |
+| last_name_kana     | string    | NOT NULL    |
+| first_name_kana    | string    | NOT NULL    |
+| birth_date         | datetime  | NOT NULL    |
+| user_id            | reference |             |
 
-* Services (job queues, cache servers, search engines, etc.)
+### Association
 
-* Deployment instructions
+- belongs_to :user
 
-* ...
+
+## Items テーブル
+
+| Column                   | Type      | Options            |
+| ------------------------ | --------- | ------------------ |
+| item_image               | image     | ActiveStorageで実装 |
+| item_name                | string    | NOT NULL           |
+| item_info                | text      | NOT NULL           |
+| item_category            | integer   | NOT NULL           |
+| item_sales_status        | reference | NOT NULL           |
+| item_shipping_fee_status | boolean   | NOT NULL           |
+| item_prefecture          | integer   | NOT NULL           |
+| item_scheduled_delivery  | integer   | NOT NULL           |
+| item_price               | integer   | NOT NULL           |
+| user_id                  | reference |                    |
+
+### Association
+
+- belongs_to :user
+- has_one    :order
+
+
+## Orders テーブル
+
+| Column             | Type      | Options     |
+| ------------------ | --------- | ----------- |
+| postal_code        | string    | NOT NULL    |
+| prefecture         | integer   | NOT NULL    |
+| city               | string    | NOT NULL    |
+| addresses          | string    | NOT NULL    |
+| building           | string    |             |
+| phone_number       | integer   | NOT NULL    |
+| user_id            | reference |             |
+| item_id            | reference |             |
+
+
+### Association
+
+- belongs_to :user
+- belongs_to :item
+
