@@ -5,27 +5,27 @@
 
 | Column             | Type   | Options     |
 | ------------------ | ------ | ----------- |
-| nickname           | string | NOT NULL    |
-| email              | string | NOT NULL    |
-| password           | string | NOT NULL    |
+| nickname           | string | null: false |
+| email              | string | null: false |
+| password           | string | null: false |
 
 ### Association
 
-- has_many :item
-- has_many :order
+- has_many :items
+- has_many :orders
 - has_one  :plofile
 
 
 ## Plofiles テーブル
 
-| Column             | Type      | Options     |
-| ------------------ | --------- | ----------- |
-| last_name          | string    | NOT NULL    |
-| first_name         | string    | NOT NULL    |
-| last_name_kana     | string    | NOT NULL    |
-| first_name_kana    | string    | NOT NULL    |
-| birth_date         | datetime  | NOT NULL    |
-| user_id            | reference |             |
+| Column             | Type      | Options           |
+| ------------------ | --------- | ----------------- |
+| last_name          | string    | null: false       |
+| first_name         | string    | null: false       |
+| last_name_kana     | string    | null: false       |
+| first_name_kana    | string    | null: false       |
+| birth_date         | datetime  | null: false       |
+| user_id            | reference | foreign_key: true |
 
 ### Association
 
@@ -37,15 +37,15 @@
 | Column                   | Type      | Options            |
 | ------------------------ | --------- | ------------------ |
 | item_image               | image     | ActiveStorageで実装 |
-| item_name                | string    | NOT NULL           |
-| item_info                | text      | NOT NULL           |
-| item_category            | integer   | NOT NULL           |
-| item_sales_status        | reference | NOT NULL           |
-| item_shipping_fee_status | boolean   | NOT NULL           |
-| item_prefecture          | integer   | NOT NULL           |
-| item_scheduled_delivery  | integer   | NOT NULL           |
-| item_price               | integer   | NOT NULL           |
-| user_id                  | reference |                    |
+| item_name                | string    | null: false        |
+| item_info                | text      | null: false        |
+| item_category            | string    | null: false        |
+| item_sales_status        | string    | null: false        |
+| item_shipping_fee_status | string    | null: false        |
+| item_prefecture          | string    | null: false        |
+| item_scheduled_delivery  | string    | null: false        |
+| item_price               | integer   | null: false        |
+| user_id                  | reference | foreign_key: true  |
 
 ### Association
 
@@ -55,20 +55,33 @@
 
 ## Orders テーブル
 
-| Column             | Type      | Options     |
-| ------------------ | --------- | ----------- |
-| postal_code        | string    | NOT NULL    |
-| prefecture         | integer   | NOT NULL    |
-| city               | string    | NOT NULL    |
-| addresses          | string    | NOT NULL    |
-| building           | string    |             |
-| phone_number       | integer   | NOT NULL    |
-| user_id            | reference |             |
-| item_id            | reference |             |
+| Column             | Type      | Options           |
+| ------------------ | --------- | ------------------|
+| user_id            | reference | foreign_key: true |
+| item_id            | reference | foreign_key: true |
 
 
 ### Association
 
 - belongs_to :user
 - belongs_to :item
+- has_one    :destination
 
+
+## Destinations テーブル
+
+| Column             | Type      | Options           |
+| ------------------ | --------- | ------------------|
+| postal_code        | string    | null: false       |
+| prefecture         | string    | null: false       |
+| city               | string    | null: false       |
+| addresses          | string    | null: false       |
+| building           | string    |                   |
+| phone_number       | string    | null: false       |
+| order_id           | reference | foreign_key: true |
+
+
+### Association
+
+- belongs_to :order
+#
