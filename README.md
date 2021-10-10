@@ -58,15 +58,15 @@
 
 ## Destinations テーブル
 
-| Column             | Type      | Options           |
-| ------------------ | --------- | ------------------|
-| postal_code        | string    | null: false       |
-| prefecture_id      | string    | null: false       |
-| city               | string    | null: false       |
-| addresses          | string    | null: false       |
-| building           | string    |                   |
-| phone_number       | string    | null: false       |
-| order              | reference | foreign_key: true |
+| Column             | Type      | Options                        |
+| ------------------ | --------- | -------------------------------|
+| postal_code        | string    | null: false                    |
+| prefecture_id      | string    | null: false                    |
+| city               | string    | null: false                    |
+| addresses          | string    | null: false                    |
+| building           | string    |                                |
+| phone_number       | string    | null: false                    |
+| order              | reference | null: false, foreign_key: true |
 
 
 ### Association
