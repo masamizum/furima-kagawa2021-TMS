@@ -4,14 +4,15 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :items
-  has_many :orders       
+  validates :nickname, presence: true
 
-  validates :nickname, presence: { message: "Nickname can't be blank" }
+  has_many :items
+  has_many :orders
+
   # メールアドレスはdeviseで必要なバリデーション有り
 
   PASSWORD_REGEX = /\A(?=.*?[a-z])(?=.*?[\d])[a-z\d]+\z/i.freeze
-  validates_format_of :encrypted_password, with: PASSWORD_REGEX, message: 'Password is invalid. Include both letters and numbers' 
+  validates_format_of :password, with: PASSWORD_REGEX, message: 'Password is invalid. Include both letters and numbers' 
   # passwordはdeviseでその他必要なバリデーション有り
 
   with_options presence: true, format: { with: /\A[ぁ-んァ-ヶ一-龥々ー]+\z/, message: 'name is invalid. Input full-width characters' } do
