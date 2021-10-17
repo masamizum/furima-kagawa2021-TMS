@@ -15,4 +15,14 @@ end
 
 #Email can't be blank
 #Password can't be blank
-#Encrypted password Password is invalid. Include both letters and numbers, Last name can't be blank, Last name name is invalid. Input full-width characters, First name can't be blank, First name name is invalid. Input full-width characters, First name kana can't be blank, First name kana name kana is invalid. Input full-width katakana characters, Last name kana can't be blank, Last name kana name kana is invalid. Input full-width katakana characters, Birth date can't be blank
+#Encrypted password Password is invalid. Include both letters and numbers
+#Last name can't be blank
+#Last name name is invalid.
+#Input full-width characters
+#First name can't be blank
+#First name name is invalid. Input full-width characters
+#First name kana can't be blank
+#First name kana name kana is invalid. Input full-width katakana characters
+#Last name kana can't be blank
+#Last name kana name kana is invalid. Input full-width katakana characters
+#Birth date can't be blank
