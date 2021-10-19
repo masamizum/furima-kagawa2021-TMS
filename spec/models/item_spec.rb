@@ -7,25 +7,25 @@ RSpec.describe Item, type: :model do
 
   describe '商品情報新規登録' do
     context '新規登録できる場合' do
-      it "必須項目が全て入力されていたら登録できる" do
+      it '必須項目が全て入力されていたら登録できる' do
         expect(@item).to be_valid
       end
     end
 
     context '新規登録できない場合' do
-      it "商品画像が空では登録できない" do
+      it '商品画像が空では登録できない' do
         @item.image = nil
         @item.valid?
         expect(@item.errors.full_messages).to include("Image can't be blank")
       end
 
-      it "商品名が空では登録できない" do
+      it '商品名が空では登録できない' do
         @item.item_name = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Item name can't be blank")
       end
 
-      it "商品の説明が空では登録できない" do
+      it '商品の説明が空では登録できない' do
         @item.item_info = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Item info can't be blank")
@@ -91,31 +91,31 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Scheduled delivery can't be blank")
       end
 
-      it "価格が空では登録できない" do
+      it '価格が空では登録できない' do
         @item.price = ''
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank")
       end
 
-      it "価格が半角数字でないと登録できない" do
+      it '価格が半角数字でないと登録できない' do
         @item.price = '３５０'
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
-      end      
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
+      end
 
-      it "価格が¥300未満は登録できない" do
+      it '価格が¥300未満は登録できない' do
         @item.price = 299
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
 
-      it "価格が¥10,000,000以上は登録できない" do
-        @item.price = 10000000
+      it '価格が¥10,000,000以上は登録できない' do
+        @item.price = 10_000_000
         @item.valid?
-        expect(@item.errors.full_messages).to include("Price Out of setting range")
+        expect(@item.errors.full_messages).to include('Price Out of setting range')
       end
 
-      it "userが紐付いていなければ出品できない" do
+      it 'userが紐付いていなければ出品できない' do
         @item.user = nil
         @item.valid?
         expect(@item.errors.full_messages).to include('User must exist')
