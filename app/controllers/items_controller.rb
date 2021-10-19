@@ -1,15 +1,10 @@
 class ItemsController < ApplicationController
   def index
-    @item = Item.all
+    # @item = Item.all
   end
 
   def new
     @item = Item.new
-    @category = Category.new
-    @sales_status = SalesStatus.new
-    @shipping_fee_status = ShippingFeeStatus.new
-    @prefecture = Prefecture.new
-    @scheduled_delivery = ScheduledDelivery.new
   end
 
   def create
