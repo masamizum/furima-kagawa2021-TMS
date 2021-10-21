@@ -21,7 +21,6 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
-    # @tweet = Tweet.find(params[:id])
   end
 
   private
