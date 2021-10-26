@@ -33,8 +33,10 @@ class ItemsController < ApplicationController
     if @item.user != current_user
       redirect_to root_path
      else
+      #@item.edit(item_params)
       render :edit
     end
+
   end
 
   def update
@@ -44,6 +46,7 @@ class ItemsController < ApplicationController
      else
       render :edit
     end
+ 
   end
 
   def show
