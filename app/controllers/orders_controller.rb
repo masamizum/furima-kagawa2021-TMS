@@ -17,11 +17,8 @@ class OrdersController < ApplicationController
     @order_destination = OrderDestination.new(order_params)
     if @order_destination.valid?
       pay_item
-      if @order_destination.save
-        redirect_to root_path
-      else
-        reder :index
-      end
+      @order_destination.save
+      redirect_to root_path
     else
       render :index
     end
