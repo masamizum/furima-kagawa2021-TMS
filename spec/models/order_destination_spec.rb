@@ -61,8 +61,13 @@ RSpec.describe OrderDestination, type: :model do
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include("Phone number can't be blank")
       end
-      it 'phone_numberが10桁以上11桁以内でないと保存できない' do
-        @order_destination.phone_number ='090888000'
+      it 'phone_numberが9桁以下では保存できない' do
+        @order_destination.phone_number ='123456789'
+        @order_destination.valid?
+        expect(@order_destination.errors.full_messages).to include("Phone number is too short")
+      end
+      it 'phone_numberが12桁以上では保存できない' do
+        @order_destination.phone_number ='123456789012'
         @order_destination.valid?
         expect(@order_destination.errors.full_messages).to include("Phone number is too short")
       end
