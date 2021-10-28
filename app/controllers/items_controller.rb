@@ -30,12 +30,14 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    if @item.user != current_user
+    if Order.exists?(item_id: params[:id])
+      redirect_to root_path and return
+    end
+    if @item.user_id != current_user.id
       redirect_to root_path
-     else
+    else
       render :edit
     end
-
   end
 
   def update
@@ -50,9 +52,6 @@ class ItemsController < ApplicationController
   def show
   end
 
-  def edit
-  end
-
   private
 
   def set_item
@@ -62,10 +61,6 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:image, :item_name, :item_info, :category_id, :sales_status_id, :shipping_fee_status_id,
                                  :prefecture_id, :scheduled_delivery_id, :price).merge(user_id: current_user.id)
-  end
-
-  def set_item
-    @item = Item.find(params[:id])
   end
 
 end
