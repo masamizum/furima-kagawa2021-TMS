@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: furima_kagawa2021_TMS_production
-  username: furima_kagawa2021_TMS
-  password: <%= ENV['FURIMA_KAGAWA2021_TMS_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= ENV['DATABASE_PASSWORD'] %>
+  socket: /var/lib/mysql/mysql.sock
