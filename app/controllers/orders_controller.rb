@@ -15,12 +15,16 @@ class OrdersController < ApplicationController
 
   def create
     @order_destination = OrderDestination.new(order_params)
-    if @order_destination.valid?
-      pay_item
-      @order_destination.save
+    if Order.exists?(item_id: params[:item_id]) || @item.user_id == current_user.id
       redirect_to root_path
     else
-      render :index
+      if @order_destination.valid?
+        pay_item
+        @order_destination.save
+        redirect_to root_path
+      else
+        render :index
+      end
     end
   end
 

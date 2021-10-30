@@ -23,9 +23,10 @@ class ItemsController < ApplicationController
   def destroy
     item = Item.find(params[:id])
     if item.user != current_user
-     redirect_to root_path
+      redirect_to root_path
     else
       item.destroy
+      redirect_to root_path
     end
   end
 
@@ -41,12 +42,15 @@ class ItemsController < ApplicationController
   end
 
   def update
-    if @item.update(item_params)
+    if @item.user_id != current_user.id
       redirect_to root_path
-     else
-      render :edit
+    else
+      if @item.update(item_params)
+        redirect_to root_path
+      else
+        render :edit
+      end
     end
- 
   end
 
   def show
